@@ -1,7 +1,7 @@
 {
-  "name": "js-task-boilerplate",
+  "name": "qa_unary-function-chainer",
   "version": "1.0.0",
-  "description": "js task boilerplate",
+  "description": "qa unary function chainer",
   "main": "src/sum.js",
   "scripts": {
     "init": "mate-scripts init",
