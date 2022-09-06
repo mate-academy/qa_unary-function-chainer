@@ -42,8 +42,7 @@ describe('chainer function', () => {
 
         chainer([myMock, myMock, myMock])(0);
 
-        expect(myMock.mock.calls.length)
-        .toBe(3);
+        expect(myMock.mock.calls.length).toBe(3);
     });
     
     it(`functions should not modify the given argument`, () => {
