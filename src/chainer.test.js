@@ -37,12 +37,14 @@ describe('chainer function', () => {
         .toHaveBeenCalledWith(0);
     });
       
-    it('arg function should be called the number of times it appears in arguments', () => {
+    it(`function should be called the number of times` + 
+        `it appears in arguments`, () => {
         const myMock = jest.fn();
 
         chainer([myMock, myMock, myMock])(0);
 
-        expect(myMock.mock.calls.length).toBe(3);
+        expect(myMock.mock.calls.length)
+        .toBe(3);
     });
     
     it(`functions should not modify the given argument`, () => {
