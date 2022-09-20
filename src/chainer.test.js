@@ -10,13 +10,13 @@ describe('chainer function', () => {
     it('should be a function', () => {
 
         expect(chainer)
-      .toBeInstanceOf(Function);
+         .toBeInstanceOf(Function);
     });
 
     it('should return a defined answer', () => {
         
         expect(chainer([])(0))
-        .toBeDefined();
+         .toBeDefined();
     });
        
     it('arg function should be called if it appears in arguments', () => {
@@ -25,7 +25,7 @@ describe('chainer function', () => {
         chainer([myMock])(0);
 
         expect(myMock)
-        .toBeCalled();
+         .toBeCalled();
     });
           
     it('arg function should be called with the argument in the brackets', () => {
@@ -34,7 +34,7 @@ describe('chainer function', () => {
         chainer([myMock])(0);
 
         expect(myMock)
-        .toHaveBeenCalledWith(0);
+          .toHaveBeenCalledWith(0);
     });
       
     it(`function should be called the number of times` + 
@@ -44,7 +44,7 @@ describe('chainer function', () => {
         chainer([myMock, myMock, myMock])(0);
 
         expect(myMock.mock.calls.length)
-        .toBe(3);
+         .toBe(3);
     });
     
     it(`functions should not modify the given argument`, () => {
@@ -53,49 +53,49 @@ describe('chainer function', () => {
         chainer([myMock, myMock, myMock, myMock, myMock])(0);
 
         expect(myMock)
-        .toHaveBeenLastCalledWith(0);
+          .toHaveBeenLastCalledWith(0);
     });
 
     it('should return the number given, after a function', () => {
 
         expect(chainer([f1])(0))
-        .toBe(0);
+          .toBe(0);
     });
         
     it('should return the number given, after a multiple functions', () => {
 
         expect(chainer([f1, f2, f3])(0))
-        .toBe(4);
+          .toBe(4);
     });  
            
     it('should work with the negative numbers', () => {
 
         expect(chainer([f1, f2, f3])(-3))
-        .toBe(16);
+          .toBe(16);
     });
              
     it('should work with the float numbers', () => {
 
         expect(chainer([f1, f2, f3])(0.3))
-        .toBeCloseTo(6.76);
+          .toBeCloseTo(6.76);
     });
                  
     it(`should work with first value of multiple numbers` + 
         `and ommit others`, () => {
 
         expect(chainer([f1, f2, f3])(2, 3)) // ((2*2)+2)^2 = 36
-        .toBe(36);
+          .toBe(36);
     });
     // negative scenario:
-    it('should return "NaN" if string was pasted', () => {
+    it('should return "NaN" if function was called with string parameter', () => {
 
         expect(chainer([f1, f2, f3])('qwe'))
-        .toBeNaN();
+         .toBeNaN();
     });
 
     it('should return "NaN" if nothing was pasted', () => {
 
         expect(chainer([f1, f2, f3])())
-        .toBeNaN();
+          .toBeNaN();
     });
 });
