@@ -67,8 +67,6 @@ describe('unary_function', () => {
       return Math.pow(x, 2);
     };
 
-    chainer([f1, f2, f3])(0);
-
     expect(chainer([f1, f2, f3])(0)).toBe(4);
   });
 });
