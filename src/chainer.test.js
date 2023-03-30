@@ -1,8 +1,8 @@
 'use strict';
 
-const { chainer } = require('./chainer');
-
 describe(`function 'chainer'`, () => {
+  const { chainer } = require('./chainer');
+
   it('should return function', () => {
     const result = chainer();
 
@@ -43,5 +43,21 @@ describe(`function 'chainer'`, () => {
 
     expect(result)
       .toBe(36);
+  });
+
+  it('should call every callback with'
+  + 'correct arguments', () => {
+    const a = jest.fn((x) => x + 2);
+    const b = jest.fn((x) => x * 2);
+    const c = jest.fn((x) => x ** 2);
+    const d = jest.fn((x) => x - 10);
+
+    const result = chainer([a, b, c, d])(2);
+
+    expect(result).toBe(54);
+    expect(a).toHaveBeenCalledWith(2);
+    expect(b).toHaveBeenCalledWith(4);
+    expect(c).toHaveBeenCalledWith(8);
+    expect(d).toHaveBeenCalledWith(64);
   });
 });
