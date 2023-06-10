@@ -1,8 +1,8 @@
-'use strict';
-
-const { chainer } = require('./chainer');
+'use strict'
 
 describe('chainer', () => {
+  const { chainer } = require('./chainer');
+
   it('should be declared', () => {
     expect(chainer).toBeInstanceOf(Function);
   });
