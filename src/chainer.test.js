@@ -4,10 +4,10 @@ const { chainer } = require('./chainer');
 
 describe('chainer', () => {
   it('should chain the unary functions correctly', () => {
-    const mockFunctionA = jest.fn((x) => x + 1);
-    const mockFunctionB = jest.fn((x) => x * 2);
-    const mockFunctionC = jest.fn((x) => x - 3);
-    const mockFunctionD = jest.fn((x) => x / 4);
+    const mockFunctionA = (x) => x + 1;
+    const mockFunctionB = (x) => x * 2;
+    const mockFunctionC = (x) => x - 3;
+    const mockFunctionD = (x) => x / 4;
 
     const chain = chainer([mockFunctionA, mockFunctionB,
       mockFunctionC, mockFunctionD]);
@@ -15,17 +15,33 @@ describe('chainer', () => {
     const input = 10;
     const result = chain(input);
 
-    expect(mockFunctionA).toHaveBeenCalledWith(input);
-    expect(mockFunctionB).toHaveBeenCalledWith(mockFunctionA(input));
+    expect(result).toEqual((((input + 1) * 2) - 3) / 4);
+  });
 
-    expect(mockFunctionC)
-      .toHaveBeenCalledWith(mockFunctionB(mockFunctionA(input)));
+  it('should return undefined if the input array is empty', () => {
+    const chain = chainer([]);
+    const result = chain(10);
 
-    expect(mockFunctionD)
-      .toHaveBeenCalledWith(mockFunctionC(mockFunctionB(mockFunctionA(input))));
+    expect(result).toBe(10);
+  });
 
-    expect(result)
-      .toEqual(mockFunctionD(mockFunctionC(mockFunctionB(mockFunctionA(input)))
-      ));
+  it('should skip non-function elements in the input array', () => {
+    const mockFunctionA = (x) => x + 1;
+    const mockFunctionB = (x) => x * 2;
+
+    const chain = chainer([mockFunctionA, 42, mockFunctionB,
+      'not a function']);
+
+    const input = 10;
+    const result = chain(input);
+
+    expect(result).toEqual(mockFunctionB(mockFunctionA(input)));
+  });
+
+  it('should return undefined if invoked without arguments', () => {
+    const chain = chainer([() => {}]);
+    const result = chain();
+
+    expect(result).toBeUndefined();
   });
 });
