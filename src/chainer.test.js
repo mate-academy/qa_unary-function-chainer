@@ -44,4 +44,4 @@ describe('chainer', () => {
 
     expect(result).toBeUndefined();
   });
-});
+})
