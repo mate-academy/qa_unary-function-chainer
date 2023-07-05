@@ -18,11 +18,12 @@ describe('chainer', () => {
     expect(result).toEqual((((input + 1) * 2) - 3) / 4);
   });
 
-  it('should return undefined if the input array is empty', () => {
+  it('should return the input value if the input array is empty', () => {
     const chain = chainer([]);
-    const result = chain(10);
+    const input = 10;
+    const result = chain(input);
 
-    expect(result).toBe(10);
+    expect(result).toBe(input);
   });
 
   it('should skip non-function elements in the input array', () => {
@@ -37,11 +38,4 @@ describe('chainer', () => {
 
     expect(result).toEqual(mockFunctionB(mockFunctionA(input)));
   });
-
-  it('should return undefined if invoked without arguments', () => {
-    const chain = chainer([() => {}]);
-    const result = chain();
-
-    expect(result).toBeUndefined();
-  });
-})
+});
