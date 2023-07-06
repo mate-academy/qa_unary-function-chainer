@@ -3,6 +3,7 @@
 const { chainer } = require('./chainer');
 
 describe('chainer', () => {
+
   it('should chain the unary functions correctly', () => {
     const mockFunctionA = (x) => x + 1;
     const mockFunctionB = (x) => x * 2;
@@ -10,7 +11,7 @@ describe('chainer', () => {
     const mockFunctionD = (x) => x / 4;
 
     const chain
-      = chainer([mockFunctionA, mockFunctionB, mockFunctionC, mockFunctionD]);
+    = chainer([mockFunctionA, mockFunctionB, mockFunctionC, mockFunctionD]);
 
     const input = 10;
     const result = chain(input);
