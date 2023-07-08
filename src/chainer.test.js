@@ -1,6 +1,6 @@
 'use strict';
 
-const { chainer } = require('./chainer');
+const chainer = require('./chainer');
 
 describe('chainer', () => {
   it('should chain the unary functions correctly', () => {
@@ -9,8 +9,8 @@ describe('chainer', () => {
     const mockFunctionC = (x) => x - 3;
     const mockFunctionD = (x) => x / 4;
 
-    const chain
-    = chainer([mockFunctionA, mockFunctionB, mockFunctionC, mockFunctionD]);
+    const chain = chainer([mockFunctionA,
+      mockFunctionB, mockFunctionC, mockFunctionD]);
 
     const input = 10;
     const result = chain(input);
