@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @param {function[]} functions
  *
@@ -8,11 +10,13 @@ function chainer(functions) {
     let result = x;
 
     for (const f of functions) {
-      result = f(result);
+      if (typeof f === 'function') {
+        result = f(result);
+      }
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
