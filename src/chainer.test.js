@@ -1,6 +1,6 @@
 'use strict';
 
-const chainer = require('./chainer');
+const { chainer } = require('./chainer');
 
 describe('chainer', () => {
   it('should chain the unary functions correctly', () => {
@@ -9,8 +9,8 @@ describe('chainer', () => {
     const mockFunctionC = (x) => x - 3;
     const mockFunctionD = (x) => x / 4;
 
-    const chain = chainer([mockFunctionA,
-      mockFunctionB, mockFunctionC, mockFunctionD]);
+    const chain = chainer([mockFunctionA, mockFunctionB,
+      mockFunctionC, mockFunctionD]);
 
     const input = 10;
     const result = chain(input);
@@ -30,7 +30,21 @@ describe('chainer', () => {
     const mockFunctionA = (x) => x + 1;
     const mockFunctionB = (x) => x * 2;
 
-    const chain = chainer([mockFunctionA, 42, mockFunctionB, 'not a function']);
+    const chain = chainer([mockFunctionA, 42,
+      mockFunctionB, 'not a function']);
+
+    const input = 10;
+    const result = chain(input);
+
+    expect(result).toEqual(mockFunctionB(mockFunctionA(input)));
+  });
+
+  it('should ignore non-function elements in the input array', () => {
+    const mockFunctionA = (x) => x + 1;
+    const mockFunctionB = (x) => x * 2;
+    const nonFunctionElement = 'not a function';
+
+    const chain = chainer([mockFunctionA, nonFunctionElement, mockFunctionB]);
 
     const input = 10;
     const result = chain(input);
