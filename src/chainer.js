@@ -19,4 +19,4 @@ function chainer(functions) {
   };
 }
 
-module.exports = chainer;
+module.exports = { chainer };
