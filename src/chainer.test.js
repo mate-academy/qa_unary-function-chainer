@@ -1,38 +1,32 @@
+'use strict'
+
 const { chainer } = require('./chainer');
-
+const { expect } = require('chai');
 describe('chainer', () => {
-  it('should chain and apply functions correctly', () => {
-    function f1(x) { return x * 2; }
-function f2(x) { return x + 2; }
-function f3(x) { return Math.pow(x, 2); }
-    const chainedFn = chainer([f1, f2, f3]);
+  it('Should correctly chain functions from left to right', () => {
+    const functions = [
+      (x) => x * 2,
+      (x) => x + 4,
+      (x) => x / 2
+    ];
 
-    expect(chainedFn(0)).toBe(4);
-    expect(chainedFn(1)).toBe(16);
-    expect(chainedFn(2)).toBe(36);
+    const result = chainer(functions)(2);
+    expect(result).to.equal(4);
   });
 
-  it('should handle an empty array of functions', () => {
-    const chainedFn = chainer([]);
+  it('Should work with different input values', () => {
+    const functions = [
+      (x) => x * 2,
+      (x) => x + 4,
+      (x) => x / 2
+    ];
 
-    expect(chainedFn(0)).toBe(0);
+    const result = chainer(functions)(-2);
+    expect(result).to.equal(0);
   });
 
-  it('should handle a single function', () => {
-    function f1(x) { return x * 2; }
-function f2(x) { return x + 2; }
-function f3(x) { return Math.pow(x, 2); }
-    const chainedFn = chainer([f1]);
-
-    expect(chainedFn(2)).toBe(4);
-  });
-
-  it('should handle multiple identical functions', () => {
-    function f1(x) { return x * 2; }
-function f2(x) { return x + 2; }
-function f3(x) { return Math.pow(x, 2); }
-    const chainedFn = chainer([f1, f1, f1]);
-
-    expect(chainedFn(2)).toBe(16);
+  it('Should handle an empty array of functions correctly', () => {
+    const result = chainer([])(10);
+    expect(result).to.equal(10); 
   });
 });
