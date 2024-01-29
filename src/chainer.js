@@ -12,7 +12,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
