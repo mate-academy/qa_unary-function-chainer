@@ -1,8 +1,11 @@
+'use strict';
+
 /**
  * @param {function[]} functions
  *
  * @returns {function}
  */
+
 function chainer(functions) {
   return (x) => {
     let result = x;
