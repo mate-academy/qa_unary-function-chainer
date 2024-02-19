@@ -1,4 +1,4 @@
-# QA Unary function chainer ([uk](readme.uk.md), [ru](readme.ru.md))
+# QA Unary function chainer ([UA](readme.uk.md))
 Write tests for a higher order function `chainer` for chaining together a list
 of unary functions. In other words, it should return a function that does a left
 fold on the given functions.
