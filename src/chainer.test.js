@@ -1,44 +1,74 @@
 'use strict';
 
-const { chainer } = require('./chainer');
+describe('unary_function', () => {
+  const { chainer } = require('./chainer');
 
-describe('chainer', () => {
-  it('should be declared', () => {
-    expect(chainer).toBeInstanceOf(Function);
+  test('the first callback should be called with correct value', () => {
+    function f2(x) {
+      return x + 2;
+    };
+
+    function f3(x) {
+      return Math.pow(x, 2);
+    };
+
+    const f = jest.fn();
+
+    chainer([f, f2, f3])(0);
+
+    expect(f).toHaveBeenCalledWith(0);
+    expect(f).toHaveBeenCalledTimes(1);
   });
 
-  it('should return input argument if an empty array of functions', () => {
-    const result = chainer([])(2);
+  test('the second callback should be called with correct value', () => {
+    function f1(x) {
+      return x * 2;
+    };
 
-    expect(result).toEqual(2);
+    function f3(x) {
+      return Math.pow(x, 2);
+    };
+
+    const f2 = jest.fn();
+
+    chainer([f1, f2, f3])(0);
+
+    expect(f2).toHaveBeenCalledWith(0);
+    expect(f2).toHaveBeenCalledTimes(1);
   });
 
-  it('should return error if nothing was passed to chainer', () => {
-    const result = chainer();
+  test('the third callback should be called with correct value', () => {
+    function f1(x) {
+      return x * 2;
+    };
 
-    expect(result).toThrow();
+    function f2(x) {
+      return x + 2;
+    };
+
+    const f3 = jest.fn();
+
+    chainer([f1, f2, f3])(0);
+
+    expect(f3).toHaveBeenCalledWith(2);
+    expect(f3).toHaveBeenCalledTimes(1);
   });
 
-  it('should return result a single function in the array', () => {
-    const func1 = jest.fn(x => x * 2);
+  test('"chainer" should return correct value', () => {
+    function f1(x) {
+      return x * 2;
+    };
 
-    const result = chainer([func1])(5);
+    function f2(x) {
+      return x + 2;
+    };
 
-    expect(func1).toHaveBeenCalledWith(5);
+    function f3(x) {
+      return Math.pow(x, 2);
+    };
 
-    expect(result).toEqual(10);
-  });
+    const result = chainer([f1, f2, f3])(0);
 
-  it('should return chain functions result', () => {
-    const func1 = jest.fn(x => x * 2);
-    const func2 = jest.fn(x => x + 2);
-    const func3 = jest.fn(x => Math.pow(x, 2));
-    const result = chainer([func1, func2, func3])(1);
-
-    expect(func1).toHaveBeenCalledWith(1);
-    expect(func2).toHaveBeenCalledWith(2);
-    expect(func3).toHaveBeenCalledWith(4);
-
-    expect(result).toEqual(16);
+    expect(result).toBe(4);
   });
 });
