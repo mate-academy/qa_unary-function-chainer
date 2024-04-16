@@ -32,7 +32,7 @@ describe('chainer', () => {
       .toHaveBeenCalledWith(8);
   });
 
-  it(`should return correct result`, () => {
+  it(`should apply each function from array to the input`, () => {
     const functions = [
       (x) => x + 1,
       (x) => x * 2,
@@ -54,7 +54,7 @@ describe('chainer', () => {
       .toBe(16);
   });
 
-  it(`should handle negative input`, () => {
+  it(`should handle 'undefined' input`, () => {
     const functions = [
       (x) => x + 1,
       (x) => x * 2,
@@ -63,5 +63,22 @@ describe('chainer', () => {
 
     expect(chainer(functions)(undefined))
       .toBe(NaN);
+  });
+
+  it(`should handle 'null' input`, () => {
+    const functions = [
+      (x) => x + 1,
+      (x) => x * 2,
+      (x) => x * x,
+    ];
+
+    expect(chainer(functions)(null))
+      .toBe(4);
+  });
+
+  it(`should return the input for empty array of functions`, () => {
+    const result = chainer([])(2);
+
+    expect(result).toEqual(2);
   });
 });
