@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @param {function[]} functions
  *
@@ -12,7 +14,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
