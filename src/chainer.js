@@ -3,6 +3,9 @@
  *
  * @returns {function}
  */
+
+'use strict';
+
 function chainer(functions) {
   return (x) => {
     let result = x;
@@ -12,7 +15,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
