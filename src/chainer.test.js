@@ -92,4 +92,16 @@ describe('chainer', () => {
     expect(f2).toHaveBeenCalledWith(4);
     expect(f3).toHaveBeenCalledWith(12);
   });
+
+  it('should return input as is if function array is empty', () => {
+    const result = chainer([])(9);
+
+    expect(result).toBe(9);
+  });
+
+  it('should return input if function array empty and input empty', () => {
+    const result = chainer([])();
+
+    expect(result).toBeUndefined();
+  });
 });
