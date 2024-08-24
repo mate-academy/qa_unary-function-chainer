@@ -17,6 +17,17 @@ describe('chainer', () => {
     expect(result(1)).toBe(2);
   });
 
+  it('should apply few functions', () => {
+    const functions = [
+      (x) => x * 2,
+      (x) => x + 2,
+      (x) => Math.pow(x, 2),
+    ];
+    const result = chainer(functions);
+
+    expect(result(0)).toBe(4);
+  });
+
   it('should called all functions', () => {
     const f1 = jest.fn();
     const f2 = jest.fn();
