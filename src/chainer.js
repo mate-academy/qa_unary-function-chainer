@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 /**
  * @param {function[]} functions
  *
@@ -12,7 +13,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
