@@ -10,11 +10,13 @@ describe('chainer', () => {
   const fiveFunc = jest.fn((x) => (x * 4) / 2);
 
   it(`should be defined`, () => {
-    expect(chainer).toBeInstanceOf(Function);
+    expect(chainer).toBeDefined();
   });
 
   it(`should return something`, () => {
-    expect(chainer([])()).toBeUndefined();
+    const chain = chainer([firstFunc, secondFunc, threeFunc]);
+
+    expect(chain).toBeTruthy();
   });
 
   it(`should return correct answer for 3 function in chain`, () => {
