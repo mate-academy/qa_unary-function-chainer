@@ -16,7 +16,7 @@ describe('chainer', () => {
   it(`should return something`, () => {
     const chain = chainer([firstFunc, secondFunc, threeFunc]);
 
-    expect(chain).toBeTruthy();
+    expect(typeof chain).toBe('function');
   });
 
   it(`should return correct answer for 3 function in chain`, () => {
