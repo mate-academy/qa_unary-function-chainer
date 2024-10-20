@@ -3,6 +3,7 @@
  *
  * @returns {function}
  */
+// eslint-disable-next-line strict
 function chainer(functions) {
   return (x) => {
     let result = x;
@@ -12,7 +13,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
