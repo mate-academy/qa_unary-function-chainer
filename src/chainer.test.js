@@ -43,6 +43,18 @@ describe('chainer', () => {
     expect(c.mock.calls[0][0]).toBe(9);
   });
 
+  it('should have every func in arr of func to return counted value', () => {
+    const a = jest.fn((x) => x);
+    const b = jest.fn((x) => x + 2);
+    const c = jest.fn((x) => x - 1);
+
+    chainer([c, b, a])(9);
+
+    expect(a).toHaveReturnedWith(10);
+    expect(b).toHaveReturnedWith(10);
+    expect(c).toHaveReturnedWith(8);
+  });
+
   it('should throw an error if func in func array is not a function', () => {
     expect(() => chainer([1])(2)).toThrow();
     expect(() => chainer([[]])(2)).toThrow();
