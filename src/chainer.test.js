@@ -28,7 +28,7 @@ describe('chainer', () => {
 
     expect(a).toHaveBeenCalled();
     expect(b).toHaveBeenCalled();
-    expect(b).toHaveBeenCalled();
+    expect(c).toHaveBeenCalled();
   });
 
   it('should pass previous func result to next func', () => {
