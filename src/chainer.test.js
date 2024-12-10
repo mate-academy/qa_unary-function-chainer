@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 describe(`chainer`, () => {
-  const { chainer } = require("./chainer");
+  const { chainer } = require('./chainer');
 
   it(`should correctly chain and execute functions with arguments`, () => {
     const f1 = jest.fn((x) => x * 2);
