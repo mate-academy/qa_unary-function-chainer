@@ -1,6 +1,8 @@
+// chainer.js
+'use strict';
+
 /**
  * @param {function[]} functions
- *
  * @returns {function}
  */
 function chainer(functions) {
@@ -12,7 +14,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
