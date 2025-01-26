@@ -16,9 +16,9 @@ describe('chainer', () => {
       const result = chained(0);
 
       expect(fn1).toHaveBeenCalledWith(0);
-      expect(fn2).toHaveBeenCalledWith(0);
-      expect(fn3).toHaveBeenCalledWith(2);
-      expect(result).toBe(4);
+      expect(fn2).toHaveBeenCalledWith(fn1(0));
+      expect(fn3).toHaveBeenCalledWith(fn2(fn1(0)));
+      expect(result).toBe(fn3(fn2(fn1(0))));
     }
   );
 });
