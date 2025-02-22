@@ -15,8 +15,11 @@ describe(`'chainer' test`, () => {
     chainer([mockF1, mockF2, mockF3])(2);
 
     expect(mockF1.mock.calls).toHaveLength(1);
+    expect(mockF1.mock.calls[0][0]).toBe(2);
     expect(mockF2.mock.calls).toHaveLength(1);
+    expect(mockF2.mock.calls[0][0]).toBe(4);
     expect(mockF3.mock.calls).toHaveLength(1);
+    expect(mockF3.mock.calls[0][0]).toBe(8);
 
     expect(mockF1.mock.results[0].value).toBe(4);
     expect(mockF2.mock.results[0].value).toBe(8);
