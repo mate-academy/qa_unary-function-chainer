@@ -1,7 +1,7 @@
 'use strict';
 
 describe('chainer', () => {
-  const chainer = require('./chainer');
+  const { chainer } = require('./chainer');
 
   it('should return a function', () => {
     const result = chainer([]);
