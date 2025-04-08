@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 describe('chainer', () => {
   const { chainer } = require('./chainer');
@@ -20,17 +20,15 @@ describe('chainer', () => {
 
   it('should chain methods together', () => {
     const val = 0;
-    const arr = [
-      jest.fn((x) => x * 2),
-      jest.fn((x) => x + 2),
-      jest.fn((x) => Math.pow(x, 2)),
-    ];
+    const f1 = jest.fn((x) => x * 2);
+    const f2 = jest.fn((x) => x + 2);
+    const f3 = jest.fn((x) => Math.pow(x, 2));
 
-    const result = chainer(arr)(val);
+    const result = chainer([f1, f2, f3])(val);
 
-    expect(arr[0]).toHaveBeenCalledWith(val);
-    expect(arr[1]).toHaveBeenCalledWith(arr[0](val));
-    expect(arr[2]).toHaveBeenCalledWith(arr[1](arr[0](val)));
+    expect(f1).toHaveBeenCalledWith(val);
+    expect(f2).toHaveBeenCalledWith(f1(val));
+    expect(f3).toHaveBeenCalledWith(f2(f1(val)));
     expect(result).toBe(4); // ((0 * 2) + 2) ^ 2 = 4
   });
 });
