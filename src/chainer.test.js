@@ -29,6 +29,6 @@ describe('chainer', () => {
     expect(f1).toHaveBeenCalledWith(val);
     expect(f2).toHaveBeenCalledWith(f1(val));
     expect(f3).toHaveBeenCalledWith(f2(f1(val)));
-    expect(result).toBe(4); // ((0 * 2) + 2) ^ 2 = 4
+    expect(result).toBe(f3(f2(f1(val))));
   });
 });
