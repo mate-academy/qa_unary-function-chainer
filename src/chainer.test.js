@@ -3,7 +3,7 @@
 const { chainer } = require('./chainer');
 
 describe('chainer', () => {
-  test('should chain functions correctly', () => {
+  test('should chain functions correctly in the specified order', () => {
     function f1(x) {
       return x * 2;
     }
@@ -18,9 +18,11 @@ describe('chainer', () => {
 
     const chainedFunction = chainer([f1, f2, f3]);
 
-    expect(chainedFunction(0)).toBe(4);
-    expect(chainedFunction(1)).toBe(16);
-    expect(chainedFunction(2)).toBe(36);
+    expect(chainedFunction(0)).toBe(4); // f3(f2(f1(0))) = f3(f2(0)) = f3(2) = 4
+    // eslint-disable-next-line max-len
+    expect(chainedFunction(1)).toBe(16); // f3(f2(f1(1))) = f3(f2(2)) = f3(4) = 16
+    // eslint-disable-next-line max-len
+    expect(chainedFunction(2)).toBe(36); // f3(f2(f1(2))) = f3(f2(4)) = f3(6) = 36
   });
 
   test('should return the same input when no functions are provided', () => {
