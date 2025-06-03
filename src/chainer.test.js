@@ -11,7 +11,7 @@ describe('chainer', () => {
     const chainedFunction = chainer([f1, f2, f3]);
 
     expect(chainedFunction(0)).toBe(4); // f1(0) → f2(0) → f3(0) = 4
-    expect(chainedFunction(1)).toBe(16); // f1(1) → f2(2) → f3(4) = 16
+    expect(chainedFunction(1)).toBe(16); // f1(1) → 2, f2(2) → 4, f3(4) → 16
   });
 
   it('should return the input if no functions are provided', () => {
