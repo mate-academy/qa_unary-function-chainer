@@ -42,7 +42,7 @@ describe('chainer', () => {
     expect(result).toBe(2);
   });
 
-  it('should pass intermediate results through the chain', () => {
+  it('should pass intermediate result through the chain', () => {
     const log = [];
     const f1 = (x) => {
       log.push(`f1:${x}`);
