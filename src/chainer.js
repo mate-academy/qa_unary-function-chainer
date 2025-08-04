@@ -1,20 +1,14 @@
-'use strict'
+'use strict';
 
 /**
- * @param {function[]} functions
- *
- * @returns {function}
+ * Chains together unary functions left-to-right.
+ * @param {Function[]} fns - List of unary functions.
+ * @returns {Function}
  */
-function chainer(functions) {
-  return (x) => {
-    let result = x;
-
-    for (const f of functions) {
-      result = f(result);
-    }
-
-    return result;
-  }
+function chainer(fns) {
+  return function(input) {
+    return fns.reduce((acc, fn) => fn(acc), input);
+  };
 }
 
 module.exports = { chainer };
