@@ -12,7 +12,7 @@ describe('chainer', () => {
 
     const composed = chainer([f1, f2, f3]);
 
-    result = composed(2); // ((((2 + 2) = 4) * 2 = 8) **2 = 64)
+    result = composed(2);
   });
 
   it('correctly composes all functions from left to right', () => {
