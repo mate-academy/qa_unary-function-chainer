@@ -49,4 +49,22 @@ describe('chainer', () => {
     expect(spy2).toHaveBeenCalledWith('A');
     expect(spy3).toHaveBeenCalledWith('AB');
   });
+
+  it('should match the example from the task description', () => {
+    function f1(x) {
+      return x * 2;
+    };
+
+    function f2(x) {
+      return x + 2;
+    };
+
+    function f3(x) {
+      return Math.pow(x, 2);
+    };
+
+    const chained = chainer([f1, f2, f3]);
+
+    expect(chained(0)).toBe(4);
+  });
 });
