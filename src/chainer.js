@@ -10,4 +10,5 @@ function chainer(functions) {
   };
 }
 
+
 module.exports = chainer;
