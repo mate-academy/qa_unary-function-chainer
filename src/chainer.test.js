@@ -4,8 +4,8 @@ const { chainer } = require('./chainer');
 
 describe('chainer', () => {
   it('should return a function', () => {
-    const chained = chainer([]);
-    expect(typeof chained).toBe('function');
+    const result = chainer([]);
+    expect(typeof result).toBe('function');
   });
 
   it('should chain multiple unary functions correctly', () => {
@@ -14,7 +14,7 @@ describe('chainer', () => {
     const f3 = x => x ** 2;
 
     const chained = chainer([f1, f2, f3]);
-    expect(chained(1)).toBe(16); // f3(f2(f1(1))) => ((1*2)+3)^2 = 16
+    expect(chained(1)).toBe(25); // f3(f2(f1(1))) => ((1*2)+3)^2 = 25
   });
 
   it('should handle a single function', () => {
@@ -25,14 +25,14 @@ describe('chainer', () => {
 
   it('should handle an empty array of functions', () => {
     const chained = chainer([]);
-    expect(chained(42)).toBe(42); // input should remain unchanged
+    expect(chained(10)).toBe(10); // returns input as-is
   });
 
   it('should handle different input types if functions support them', () => {
-    const f1 = s => s.toUpperCase();
-    const f2 = s => `${s}!`;
+    const f1 = s => s + 'a';
+    const f2 = s => s + 'b';
     const chained = chainer([f1, f2]);
-    expect(chained('hi')).toBe('HI!');
+    expect(chained('x')).toBe('xab');
   });
 });
 
