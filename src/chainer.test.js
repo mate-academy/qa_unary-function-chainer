@@ -56,4 +56,33 @@ describe("chainer", () => {
     const second = jest.fn((arg2) => arg2 + arg2);
     expect(typeof chainer([first, second])(10) === "number").toBe(true);
   });
+
+   it("should return chain", () => {
+     const input = 10;
+     const a = jest.fn((arg1) => arg1 * arg1);
+     const b = jest.fn((arg2) => arg2 + arg2);
+     const c = jest.fn((arg3) => arg3 / arg3);
+     const d = jest.fn((arg4) => arg4 - arg4);
+
+     expect(chainer([a, b, c, d])(input) === d(c(b(a(input))))).toEqual(true);
+   });
+
+   it(`should return '4'`, () => {
+     const x = 0;
+     const f1 = jest.fn((x) => x * 2);
+     const f2 = jest.fn((x) => x + 2);
+     const f3 = jest.fn((x) => Math.pow(x, 2));
+
+     const result = chainer([f1, f2, f3])(x);
+     expect(f1).toHaveBeenCalledWith(x);
+     expect(f1).toHaveBeenCalled();
+
+     expect(f2).toHaveBeenCalledWith(0);
+     expect(f2).toHaveBeenCalled();
+
+     expect(f3).toHaveBeenCalledWith(2);
+     expect(f3).toHaveBeenCalled();
+
+     expect(result).toEqual(4);
+   });
 });
