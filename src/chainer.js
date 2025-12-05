@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * @param {function[]} functions
@@ -6,7 +6,7 @@
  * @returns {function}
  */
 function chainer(functions) {
-  return (x) => {
+  return (x = 0) => {
     let result = x;
 
     for (const f of functions) {
@@ -14,7 +14,7 @@ function chainer(functions) {
     }
 
     return result;
-  }
+  };
 }
 
 module.exports = { chainer };
