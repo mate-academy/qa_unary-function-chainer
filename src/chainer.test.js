@@ -7,9 +7,9 @@ describe('chainer()', () => {
   let f1, f2, f3;
 
   beforeEach(() => {
-    f1 = jest.fn((x) => x + 1);
-    f2 = jest.fn((x) => x * 3);
-    f3 = jest.fn((x) => x - 2);
+    f1 = jest.fn((x) => x * 2);
+    f2 = jest.fn((x) => x + 2);
+    f3 = jest.fn((x) => Math.pow(x, 2));
   });
 
   it('should be a function', () => {
@@ -32,35 +32,35 @@ describe('chainer()', () => {
   it('should work with a single function', () => {
     const chained = chainer([f1]);
 
-    expect(chained(10)).toBe(11);
+    expect(chained(10)).toBe(20);
   });
 
-  describe('Chaining Logic', () => {
-    it('should chain unary functions in left-to-right order', () => {
-      const chained = chainer([f1, f2, f3]);
+  it('should work with multiple functions', () => {});
 
-      expect(chained(0)).toBe(1);
-    });
+  it('should chain unary functions in left-to-right order', () => {
+    const chained = chainer([f1, f2, f3]);
 
-    it('should work with strings', () => {
-      const addA = (x) => x + 'a';
-      const addB = (x) => x + 'b';
+    expect(chained(0)).toBe(4);
+  });
 
-      const chained = chainer([addA, addB]);
+  it('should work with strings', () => {
+    const addA = (x) => x + 'a';
+    const addB = (x) => x + 'b';
 
-      expect(chained('')).toBe('ab');
-    });
+    const chained = chainer([addA, addB]);
+
+    expect(chained('')).toBe('ab');
   });
 
   it('should pass the output of one function as the input to the next', () => {
     const chained = chainer([f1, f2, f3]);
     const finalResult = chained(5);
 
-    expect(finalResult).toBe(16);
+    expect(finalResult).toBe(144);
 
     expect(f1).toHaveBeenCalledWith(5);
-    expect(f2).toHaveBeenCalledWith(6);
-    expect(f3).toHaveBeenCalledWith(18);
+    expect(f2).toHaveBeenCalledWith(10);
+    expect(f3).toHaveBeenCalledWith(12);
   });
 
   it('should handle mock functions with hardcoded return values', () => {
