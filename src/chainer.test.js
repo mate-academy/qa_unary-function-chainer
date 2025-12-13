@@ -35,8 +35,6 @@ describe('chainer()', () => {
     expect(chained(10)).toBe(20);
   });
 
-  it('should work with multiple functions', () => {});
-
   it('should chain unary functions in left-to-right order', () => {
     const chained = chainer([f1, f2, f3]);
 
