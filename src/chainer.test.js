@@ -36,4 +36,14 @@ describe("chainer", () => {
     }
     expect(chainer([f1, f2, f3])(0)).toBe(4);
   });
+
+  it(`should chain functions correctly`, () => {
+    const func1 = jest.fn((x) => x + 1);
+    const func2 = jest.fn((x) => x * 2);
+
+    chainer([func1, func2])(5);
+
+    expect(func1).toHaveBeenCalledWith(5);
+    expect(func2).toHaveBeenCalledWith(6);
+  });
 });
