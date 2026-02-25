@@ -8,9 +8,9 @@ describe('"chainer" function', () => {
   let f3;
 
   beforeEach(() => {
-    f1 = jest.fn((x) => x + 1);
-    f2 = jest.fn((x) => x * 2);
-    f3 = jest.fn((x) => x - 3);
+    f1 = jest.fn((x) => x * 2);
+    f2 = jest.fn((x) => x + 2);
+    f3 = jest.fn((x) => Math.pow(x, 2));
   });
 
   it('should return a function', () => {
@@ -32,9 +32,9 @@ describe('"chainer" function', () => {
   it('should pass result from one function to another', () => {
     const chained = chainer([f1, f2, f3]);
 
-    const result = chained(5);
+    const result = chained(0);
 
-    expect(result).toBe(9);
+    expect(result).toBe(4);
   });
 
   it('should return initial value if array is empty', () => {
