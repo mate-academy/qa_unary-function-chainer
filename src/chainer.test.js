@@ -20,11 +20,11 @@ describe('chainer', () => {
     const f1 = jest.fn((x) => x * 2);
     const f2 = jest.fn((x) => x + 2);
     const f3 = jest.fn((x) => Math.pow(x, 2));
-    const result = chainer([f1, f2, f3])(0);
+    const result = chainer([f1, f2, f3])(5);
 
-    expect(f1).toHaveBeenCalledWith(0);
-    expect(f2).toHaveBeenCalledWith(0);
-    expect(f3).toHaveBeenCalledWith(2);
-    expect(result).toBe(4);
+    expect(f1).toHaveBeenCalledWith(5);
+    expect(f2).toHaveBeenCalledWith(10);
+    expect(f3).toHaveBeenCalledWith(12);
+    expect(result).toBe(144);
   });
 });
