@@ -5,6 +5,7 @@
  *
  * @returns {function}
  */
+'use strict';
 function chainer(functions) {
   return (x) => {
     let result = x;
