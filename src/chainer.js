@@ -5,6 +5,7 @@
  *
  * @returns {function}
  */
+
 function chainer(functions) {
   return (x) => {
     let result = x;
